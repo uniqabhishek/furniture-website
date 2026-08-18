@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grain & Joint — Solid Wood Furniture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root{
+  --walnut: #2B1D14;
+  --walnut-soft: #4A3626;
+  --oak: #C8A272;
+  --linen: #F2ECE1;
+  --paper: #FBF8F2;
+  --sage: #6E7F5C;
+  --sage-dark: #55624A;
+  --ink: #23201B;
+  --line: rgba(43,29,20,0.14);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Work Sans', sans-serif;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+h1,h2,h3{font-family:'Fraunces', serif;font-weight:450;letter-spacing:-0.01em;}
+.mono{font-family:'JetBrains Mono', monospace;text-transform:uppercase;letter-spacing:0.08em;}
+:focus-visible{outline:2px solid var(--sage);outline-offset:3px;}
+button{font-family:inherit;}
+
+/* PAGES */
+.page{display:none;}
+.page.active{display:block;}
+
+/* NAV */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,248,242,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 32px;max-width:1180px;margin:0 auto;
+}
+.logo{
+  font-family:'Fraunces', serif;font-size:22px;font-weight:600;
+  display:flex;align-items:center;gap:10px;cursor:pointer;background:none;border:none;
+}
+.logo-mark{width:26px;height:26px;flex-shrink:0;}
+.nav-links{display:flex;gap:36px;font-size:14px;}
+.nav-links button{
+  position:relative;padding-bottom:4px;background:none;border:none;font-size:14px;
+  color:var(--ink);cursor:pointer;font-family:inherit;
+}
+.nav-links button::after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:var(--walnut);transition:width 0.25s ease;
+}
+.nav-links button:hover::after, .nav-links button.active::after{width:100%;}
+.nav-links button.active{color:var(--walnut);font-weight:500;}
+.nav-cta{
+  font-size:13px;padding:10px 20px;border:1px solid var(--walnut);
+  border-radius:2px;transition:background 0.2s ease, color 0.2s ease;
+  white-space:nowrap;background:none;cursor:pointer;color:var(--ink);
+}
+.nav-cta:hover{background:var(--walnut);color:var(--paper);}
+.menu-btn{display:none;background:none;border:none;font-size:22px;cursor:pointer;color:var(--walnut);}
+
+/* BUTTONS */
+.btn-primary{
+  background:var(--walnut);color:var(--paper);
+  padding:14px 28px;font-size:14px;border-radius:2px;border:none;
+  transition:background 0.2s ease, transform 0.2s ease;
+  display:inline-block;cursor:pointer;font-family:inherit;
+}
+.btn-primary:hover{background:var(--sage-dark);transform:translateY(-1px);}
+.btn-text{font-size:14px;border-bottom:1px solid var(--ink);padding-bottom:2px;background:none;border-top:none;border-left:none;border-right:none;cursor:pointer;color:var(--ink);font-family:inherit;}
+
+/* STRIP */
+.strip{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:18px 0;overflow:hidden;background:var(--linen);
+}
+.strip-inner{
+  display:flex;gap:56px;white-space:nowrap;
+  animation:scroll 28s linear infinite;
+  font-size:13px;color:var(--walnut-soft);
+  width:max-content;
+}
+.strip-inner span{display:flex;align-items:center;gap:10px;}
+.strip-inner span::after{content:"—";color:var(--oak);margin-left:56px;}
+@keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion: reduce){.strip-inner{animation:none;}}
+
+/* SECTION HEADS */
+.section{padding:100px 32px;}
+.section-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:56px;gap:24px;flex-wrap:wrap;
+}
+.section-head h2{font-size:clamp(28px,3.4vw,42px);color:var(--walnut);}
+.section-head p{color:var(--walnut-soft);max-width:36ch;font-size:15px;}
+.kicker{font-size:12px;color:var(--sage-dark);margin-bottom:12px;}
+
+/* PRODUCTS */
+.products{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+}
+.card{
+  background:var(--linen);border-radius:4px;overflow:hidden;
+  border:1px solid var(--line);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 24px 40px -24px rgba(43,29,20,0.35);}
+.card-img{height:230px;position:relative;overflow:hidden;background-size:cover;background-position:center;}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+.card:hover .card-img img{transform:scale(1.06);}
+.card-body{padding:22px 22px 26px;}
+.card-num{font-size:11px;color:var(--sage-dark);margin-bottom:10px;}
+.card h3{font-size:20px;color:var(--walnut);margin-bottom:6px;}
+.card-desc{font-size:13.5px;color:var(--walnut-soft);margin-bottom:16px;}
+.card-foot{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:14px;border-top:1px solid var(--line);font-size:13px;
+}
+.price{font-family:'JetBrains Mono', monospace;color:var(--walnut);}
+
+/* FOOTER */
+footer{padding:56px 32px 40px;border-top:1px solid var(--line);}
+.footer-grid{
+  max-width:1180px;margin:0 auto;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;
+  font-size:13.5px;color:var(--walnut-soft);
+}
+.footer-cols{display:flex;gap:64px;flex-wrap:wrap;}
+.footer-col h4{font-family:'Fraunces', serif;font-size:14px;color:var(--walnut);margin-bottom:14px;font-weight:450;}
+.footer-col button{display:block;margin-bottom:9px;color:var(--walnut-soft);background:none;border:none;cursor:pointer;font-size:13.5px;font-family:inherit;padding:0;text-align:left;}
+.footer-col button:hover{color:var(--walnut);}
+.footer-bottom{
+  max-width:1180px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;font-size:12px;color:var(--walnut-soft);flex-wrap:wrap;gap:12px;
+}
+
+/* CTA */
+.cta-section{background:var(--sage);color:var(--paper);padding:90px 32px;text-align:center;}
+.cta-section h2{font-size:clamp(30px,4vw,46px);margin-bottom:18px;color:var(--paper);}
+.cta-section p{color:rgba(251,248,242,0.8);margin-bottom:32px;font-size:16px;}
+.cta-section .btn-primary{background:var(--walnut);}
+.cta-section .btn-primary:hover{background:var(--paper);color:var(--walnut);}
+
+/* HOME PAGE */
+.hero{
+  position:relative;min-height:88vh;display:flex;align-items:flex-end;
+  background:linear-gradient(0deg, rgba(35,32,27,0.72) 0%, rgba(35,32,27,0.25) 45%, rgba(35,32,27,0.55) 100%),
+    url('https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1800&auto=format&fit=crop') center/cover no-repeat;
+  color:var(--paper);
+}
+.hero-inner{max-width:1180px;margin:0 auto;padding:0 32px 72px;width:100%;}
+.eyebrow{font-size:12px;color:var(--oak);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--oak);}
+.hero h1{font-size:clamp(38px, 5.4vw, 66px);line-height:1.04;margin-bottom:22px;max-width:14ch;color:var(--paper);}
+.hero h1 em{font-style:italic;color:var(--oak);}
+.hero p{font-size:16.5px;max-width:44ch;color:rgba(251,248,242,0.85);margin-bottom:30px;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+.hero-actions .btn-text{color:var(--paper);border-bottom-color:var(--paper);}
+
+.intro-split{
+  max-width:1180px;margin:0 auto;display:grid;grid-template-columns:0.9fr 1.1fr;
+  gap:64px;align-items:center;
+}
+.intro-split img{border-radius:4px;aspect-ratio:4/5;object-fit:cover;}
+.intro-split h2{font-size:clamp(26px,3vw,36px);color:var(--walnut);margin-bottom:18px;}
+.intro-split p{color:var(--walnut-soft);font-size:15.5px;margin-bottom:16px;max-width:50ch;}
+.stat-row{display:flex;gap:40px;margin-top:28px;}
+.stat b{display:block;font-family:'Fraunces', serif;font-size:30px;color:var(--walnut);}
+.stat span{font-size:11.5px;color:var(--sage-dark);}
+
+.process-section{background:var(--walnut);color:var(--linen);}
+.process-section .section-head h2{color:var(--paper);}
+.process-section .section-head p{color:rgba(242,236,225,0.65);}
+.process-section .kicker{color:var(--oak);}
+.process-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(242,236,225,0.15);}
+.process-step{background:var(--walnut);padding:32px 24px;}
+.process-step .step-mark{font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--oak);margin-bottom:22px;}
+.process-step h3{font-size:18px;color:var(--paper);margin-bottom:10px;font-weight:450;}
+.process-step p{font-size:13.5px;color:rgba(242,236,225,0.6);}
+
+/* COLLECTION PAGE */
+.page-hero{
+  padding:64px 32px 48px;max-width:1180px;margin:0 auto;
+  border-bottom:1px solid var(--line);
+}
+.page-hero h1{font-size:clamp(32px,4.4vw,52px);color:var(--walnut);max-width:16ch;margin-bottom:16px;}
+.page-hero p{color:var(--walnut-soft);max-width:52ch;font-size:15.5px;}
+
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;max-width:1180px;margin:36px auto 0;padding:0 32px;}
+.filter-pill{
+  font-size:12.5px;padding:9px 18px;border:1px solid var(--line);border-radius:999px;
+  color:var(--walnut-soft);cursor:default;
+}
+.filter-pill.active{background:var(--walnut);color:var(--paper);border-color:var(--walnut);}
+
+.cat-block{max-width:1180px;margin:0 auto;padding:88px 32px 0;}
+.cat-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:36px;gap:16px;flex-wrap:wrap;}
+.cat-head h2{font-size:clamp(24px,3vw,32px);color:var(--walnut);}
+.cat-head span{font-size:12.5px;color:var(--sage-dark);}
+
+/* ABOUT PAGE */
+.about-hero{
+  position:relative;min-height:56vh;display:flex;align-items:flex-end;
+  background:linear-gradient(0deg, rgba(35,32,27,0.78) 0%, rgba(35,32,27,0.2) 60%),
+    url('https://images.unsplash.com/photo-1779031242515-205111711b23?q=80&w=1800&auto=format&fit=crop') center/cover no-repeat;
+  color:var(--paper);
+}
+.about-hero-inner{max-width:1180px;margin:0 auto;padding:0 32px 56px;width:100%;}
+.about-hero h1{font-size:clamp(32px,4.6vw,54px);max-width:16ch;color:var(--paper);margin-bottom:14px;}
+.about-hero p{max-width:46ch;color:rgba(251,248,242,0.85);font-size:15.5px;}
+
+.split{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:0.85fr 1.15fr;gap:72px;align-items:center;}
+.split img{border-radius:4px;aspect-ratio:4/5;object-fit:cover;}
+.split h2{font-size:clamp(26px,3.2vw,36px);color:var(--walnut);margin-bottom:18px;}
+.split p{color:var(--walnut-soft);font-size:15.5px;margin-bottom:16px;max-width:52ch;}
+
+.visit-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+.visit-card{background:var(--linen);border:1px solid var(--line);border-radius:4px;padding:36px;}
+.visit-card h3{font-size:20px;color:var(--walnut);margin-bottom:18px;}
+.hours-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--walnut-soft);}
+.hours-row:last-child{border-bottom:none;}
+.hours-row span:last-child{color:var(--walnut);font-family:'JetBrains Mono', monospace;font-size:12.5px;}
+.contact-line{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;}
+.contact-line:last-child{border-bottom:none;}
+.contact-line span:first-child{color:var(--sage-dark);}
+
+@media (max-width: 860px){
+  .nav-links{display:none;}
+  .menu-btn{display:block;}
+  .products{grid-template-columns:1fr;}
+  .section{padding:64px 24px;}
+  .intro-split{grid-template-columns:1fr;gap:32px;}
+  .process-grid{grid-template-columns:1fr;}
+  .split{grid-template-columns:1fr;gap:32px;}
+  .visit-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <button class="logo" onclick="showPage('home')">
+      <svg class="logo-mark" viewBox="0 0 26 26" fill="none"><path d="M4 20V8L13 3L22 8V20" stroke="#2B1D14" stroke-width="1.6"/><path d="M9 20V13H17V20" stroke="#2B1D14" stroke-width="1.6"/></svg>
+      Grain &amp; Joint
+    </button>
+    <div class="nav-links">
+      <button class="nav-btn active" data-page="home" onclick="showPage('home')">Home</button>
+      <button class="nav-btn" data-page="collection" onclick="showPage('collection')">Collection</button>
+      <button class="nav-btn" data-page="about" onclick="showPage('about')">About &amp; Visit</button>
+    </div>
+    <button class="nav-cta" onclick="showPage('about','visit')">Book a viewing</button>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+  </nav>
+</header>
+
+<!-- ================= HOME PAGE ================= -->
+<div id="page-home" class="page active">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow mono">Est. 2012 · Made in the Workshop</div>
+      <h1>Furniture built to <em>outlast</em> three house moves.</h1>
+      <p>Solid oak, walnut, and ash — joined by hand, finished slow, and sold with the exact tree it came from written on the tag.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('collection')">View the collection</button>
+        <button class="btn-text" onclick="showPage('home','process')">See how it's made →</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <span>European Oak</span><span>American Walnut</span><span>Ash</span><span>Reclaimed Elm</span><span>Cherry</span>
+      <span>European Oak</span><span>American Walnut</span><span>Ash</span><span>Reclaimed Elm</span><span>Cherry</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="intro-split">
+      <img src="https://images.unsplash.com/photo-1779031242515-205111711b23?q=80&w=1000&auto=format&fit=crop" alt="Carpenter shaping a piece of solid wood in the workshop">
+      <div>
+        <div class="kicker mono">About the workshop</div>
+        <h2>A small team, a slow backlog, and a six-week wait most people say is worth it.</h2>
+        <p>Grain &amp; Joint started as one workbench in a rented garage. Today it's a team of nine, still cutting every joint by hand, still refusing to laminate a tabletop. We keep the backlog long on purpose — it's what lets us say no to shortcuts.</p>
+        <button class="btn-text" onclick="showPage('about')">Read our story →</button>
+        <div class="stat-row">
+          <div class="stat"><b>1,200+</b><span class="mono">pieces delivered</span></div>
+          <div class="stat"><b>25 yr</b><span class="mono">structural guarantee</span></div>
+          <div class="stat"><b>9</b><span class="mono">makers on the floor</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="section-head">
+      <div>
+        <div class="kicker mono">Featured pieces</div>
+        <h2>Three ways to start<br>a room over.</h2>
+      </div>
+      <p>A small taste of the collection — the full range is one click away.</p>
+    </div>
+    <div class="products">
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1623654816619-dd66988b63c2?q=80&w=800&auto=format&fit=crop" alt="Solid oak dining table set for six"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 01</div>
+          <h3>The Amble Table</h3>
+          <p class="card-desc">Solid oak dining table, seats six, waxed by hand over three coats.</p>
+          <div class="card-foot"><span class="price">₹68,400</span><span class="mono">Oak</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?q=80&w=800&auto=format&fit=crop" alt="Upholstered armchair with a solid wood frame"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 05</div>
+          <h3>The Harlow Chair</h3>
+          <p class="card-desc">Ash-framed armchair with a deep seat and a boucle cushion.</p>
+          <div class="card-foot"><span class="price">₹41,200</span><span class="mono">Ash</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1600054648630-e10e710825f6?q=80&w=800&auto=format&fit=crop" alt="Solid wood bed frame in a sunlit bedroom"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 07</div>
+          <h3>The Marrow Bed</h3>
+          <p class="card-desc">Low platform bed frame, walnut veneer over a solid oak core.</p>
+          <div class="card-foot"><span class="price">₹79,900</span><span class="mono">Walnut</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process-section" id="home-process">
+    <div class="section-head">
+      <div>
+        <div class="kicker mono">How it's built</div>
+        <h2>From log to<br>living room.</h2>
+      </div>
+      <p>No particleboard, no staples, nothing that can't be repaired by hand in twenty years.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step"><div class="step-mark">01 — Select</div><h3>Board is chosen</h3><p>We pick each plank for grain and stability, rejecting anything with tension in the wood.</p></div>
+      <div class="process-step"><div class="step-mark">02 — Join</div><h3>Cut and jointed</h3><p>Mortise, tenon, and dovetail — no screws in a load-bearing joint, ever.</p></div>
+      <div class="process-step"><div class="step-mark">03 — Finish</div><h3>Hand-finished</h3><p>Hardwax oil applied in three thin coats, sanded between each, over five days.</p></div>
+      <div class="process-step"><div class="step-mark">04 — Deliver</div><h3>Delivered assembled</h3><p>Two people, one van, no flat-pack — it arrives ready to use.</p></div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Come sit on it first.</h2>
+    <p>The showroom is open Tuesday to Saturday — no appointment needed for a look around.</p>
+    <button class="btn-primary" onclick="showPage('about','visit')">Get directions</button>
+  </section>
+
+</div>
+
+<!-- ================= COLLECTION PAGE ================= -->
+<div id="page-collection" class="page">
+
+  <div class="page-hero">
+    <div class="kicker mono">The full collection</div>
+    <h1>Every piece we currently make.</h1>
+    <p>Sorted by room, not by trend. Each listing includes the wood species, lead time, and the joinery used — the same spec sheet that ships on the piece itself.</p>
+  </div>
+
+  <div class="filter-row">
+    <span class="filter-pill active">All</span>
+    <span class="filter-pill">Tables</span>
+    <span class="filter-pill">Seating</span>
+    <span class="filter-pill">Bedroom</span>
+    <span class="filter-pill">Storage</span>
+  </div>
+
+  <section class="cat-block">
+    <div class="cat-head"><h2>Tables</h2><span class="mono">3 pieces</span></div>
+    <div class="products">
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1623654816619-dd66988b63c2?q=80&w=800&auto=format&fit=crop" alt="Solid oak dining table set for six"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 01</div>
+          <h3>The Amble Table</h3>
+          <p class="card-desc">Solid oak, seats six, waxed by hand over three coats. Mortise &amp; tenon joinery throughout.</p>
+          <div class="card-foot"><span class="price">₹68,400</span><span class="mono">Oak · 6–8 wks</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1623654816619-dd66988b63c2?q=80&w=800&auto=format&fit=crop&sat=-30" alt="Compact wooden dining table for a smaller room"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 08</div>
+          <h3>The Cotter Table</h3>
+          <p class="card-desc">A narrower drop-leaf table for smaller dining rooms. Extends to seat four.</p>
+          <div class="card-foot"><span class="price">₹44,600</span><span class="mono">Ash · 4–6 wks</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=800&auto=format&fit=crop" alt="Low wooden coffee table in a living room"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 09</div>
+          <h3>The Birchgate Coffee Table</h3>
+          <p class="card-desc">Live-edge coffee table with a single hairpin-free steel stretcher.</p>
+          <div class="card-foot"><span class="price">₹26,300</span><span class="mono">Walnut · 3–5 wks</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat-block">
+    <div class="cat-head"><h2>Seating</h2><span class="mono">2 pieces</span></div>
+    <div class="products">
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?q=80&w=800&auto=format&fit=crop" alt="Upholstered armchair with a solid wood frame"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 05</div>
+          <h3>The Harlow Chair</h3>
+          <p class="card-desc">Ash-framed armchair with a deep seat and a boucle cushion. Removable cover.</p>
+          <div class="card-foot"><span class="price">₹41,200</span><span class="mono">Ash · 5–7 wks</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=800&auto=format&fit=crop" alt="Wooden-framed sofa in a bright living room"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 06</div>
+          <h3>The Osler Sofa</h3>
+          <p class="card-desc">Three-seat sofa on an exposed solid oak frame, linen upholstery.</p>
+          <div class="card-foot"><span class="price">₹1,12,000</span><span class="mono">Oak · 8–10 wks</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat-block">
+    <div class="cat-head"><h2>Bedroom</h2><span class="mono">1 piece</span></div>
+    <div class="products">
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1600054648630-e10e710825f6?q=80&w=800&auto=format&fit=crop" alt="Solid wood bed frame in a sunlit bedroom"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 07</div>
+          <h3>The Marrow Bed</h3>
+          <p class="card-desc">Low platform bed frame, walnut veneer over a solid oak core. Queen &amp; king.</p>
+          <div class="card-foot"><span class="price">₹79,900</span><span class="mono">Walnut · 6–8 wks</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cat-block" style="padding-bottom:88px;">
+    <div class="cat-head"><h2>Storage</h2><span class="mono">1 piece</span></div>
+    <div class="products">
+      <div class="card">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1779031242515-205111711b23?q=80&w=800&auto=format&fit=crop" alt="Wooden sideboard cabinet under construction in the workshop"></div>
+        <div class="card-body">
+          <div class="card-num mono">Spec 02</div>
+          <h3>The Corvo Cabinet</h3>
+          <p class="card-desc">Walnut sideboard with brass pulls and a single adjustable shelf.</p>
+          <div class="card-foot"><span class="price">₹94,200</span><span class="mono">Walnut · 6–8 wks</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Not sure what fits your room?</h2>
+    <p>Bring a photo of the space to the showroom — we'll sketch a layout with you, no charge.</p>
+    <button class="btn-primary" onclick="showPage('about','visit')">Plan a visit</button>
+  </section>
+
+</div>
+
+<!-- ================= ABOUT PAGE ================= -->
+<div id="page-about" class="page">
+
+  <section class="about-hero">
+    <div class="about-hero-inner">
+      <div class="eyebrow mono" style="color:var(--oak);margin-bottom:16px;">Since 2012</div>
+      <h1>Nine people, one workshop, no shortcuts.</h1>
+      <p>The story of how a one-bench garage operation became a six-week waitlist — and why we've kept it that way.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="split">
+      <img src="https://images.unsplash.com/photo-1779031242515-205111711b23?q=80&w=1000&auto=format&fit=crop" alt="Carpenter shaping a piece of solid wood in the workshop">
+      <div>
+        <div class="kicker mono">Our story</div>
+        <h2>It started because flat-pack furniture kept falling apart.</h2>
+        <p>Grain &amp; Joint started as one workbench in a rented garage, built out of frustration with furniture that didn't survive a single move. Today it's a team of nine, still cutting every joint by hand, still refusing to laminate a tabletop.</p>
+        <p>We keep the backlog long on purpose — six to ten weeks, depending on the piece. That's what lets us say no to shortcuts: no staples in a joint, no particleboard behind a walnut veneer, nothing we wouldn't want to repair ourselves in twenty years.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process-section" id="about-process">
+    <div class="section-head">
+      <div>
+        <div class="kicker mono">How it's built</div>
+        <h2>From log to<br>living room.</h2>
+      </div>
+      <p>Four stages, five days minimum on finishing alone.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step"><div class="step-mark">01 — Select</div><h3>Board is chosen</h3><p>We pick each plank for grain and stability, rejecting anything with tension in the wood.</p></div>
+      <div class="process-step"><div class="step-mark">02 — Join</div><h3>Cut and jointed</h3><p>Mortise, tenon, and dovetail — no screws in a load-bearing joint, ever.</p></div>
+      <div class="process-step"><div class="step-mark">03 — Finish</div><h3>Hand-finished</h3><p>Hardwax oil applied in three thin coats, sanded between each, over five days.</p></div>
+      <div class="process-step"><div class="step-mark">04 — Deliver</div><h3>Delivered assembled</h3><p>Two people, one van, no flat-pack — it arrives ready to use.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="about-visit">
+    <div class="section-head">
+      <div>
+        <div class="kicker mono">Visit the showroom</div>
+        <h2>Come sit on it first.</h2>
+      </div>
+      <p>No appointment needed for a look around — just for a full design consultation.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-card">
+        <h3>Showroom hours</h3>
+        <div class="hours-row"><span>Tuesday – Friday</span><span>10:00 – 18:00</span></div>
+        <div class="hours-row"><span>Saturday</span><span>10:00 – 16:00</span></div>
+        <div class="hours-row"><span>Sunday – Monday</span><span>Closed</span></div>
+      </div>
+      <div class="visit-card">
+        <h3>Get in touch</h3>
+        <div class="contact-line"><span>Address</span><span>14 Millwright Lane, Workshop District</span></div>
+        <div class="contact-line"><span>Phone</span><span>+91 98765 43210</span></div>
+        <div class="contact-line"><span>Email</span><span>hello@grainandjoint.studio</span></div>
+        <div class="contact-line"><span>Consultations</span><span>By appointment</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Ready to start the build?</h2>
+    <p>Tell us the room, the wood, and the deadline — we'll tell you honestly if we can make it in time.</p>
+    <a href="mailto:hello@grainandjoint.studio" class="btn-primary" style="display:inline-block;">Email the workshop</a>
+  </section>
+
+</div>
+
+<!-- ================= SHARED FOOTER ================= -->
+<footer>
+  <div class="footer-grid">
+    <div><div class="logo" style="cursor:default;">Grain &amp; Joint</div></div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <button onclick="showPage('collection')">Tables</button>
+        <button onclick="showPage('collection')">Seating</button>
+        <button onclick="showPage('collection')">Storage &amp; Beds</button>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <button onclick="showPage('about')">Our process</button>
+        <button onclick="showPage('about')">Wood guide</button>
+        <button onclick="showPage('about')">Care &amp; repair</button>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <button onclick="showPage('about','visit')">Showroom hours</button>
+        <button onclick="showPage('about','visit')">Contact</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Grain &amp; Joint Furniture Co.</span>
+    <span>Every piece signed and dated on delivery.</span>
+  </div>
+</footer>
+
+<script>
+function showPage(name, anchor){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+  window.scrollTo(0, 0);
+  if(anchor){
+    setTimeout(() => {
+      const el = document.getElementById(name + '-' + anchor);
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    }, 50);
+  }
+}
+</script>
+
+</body>
+</html>
