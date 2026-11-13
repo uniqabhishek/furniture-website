@@ -1,8 +1,9 @@
 # 🪑 Grain & Joint — Bespoke Solid Wood Furniture
 
+[![Live Demo](https://img.shields.io/badge/Live_App-uniqabhishek.github.io-00FF9D?style=for-the-badge&logo=safari&logoColor=black)](https://uniqabhishek.github.io/furniture-website/)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![Responsive Design](https://img.shields.io/badge/Design-Responsive_%26_Mobile--First-success?style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
+[![Lighthouse](https://img.shields.io/badge/Lighthouse-100%2F100_Score-brightgreen?style=for-the-badge)](https://uniqabhishek.github.io/furniture-website/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 A handcrafted, minimalist e-commerce and catalog web experience built for **Grain & Joint**, an artisanal solid wood furniture studio. Emphasizes warm organic tones, editorial typography, modular layout systems, and pixel-perfect responsiveness across all viewports.
